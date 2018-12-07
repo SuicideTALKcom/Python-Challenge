@@ -1,54 +1,60 @@
 import os
 import csv
 
-bank_csv = os.path.join("..", "Resources", "budget_data.csv")
+month_count = 0
+date_list = []
+profit_loss_list = []
+total_profit_loss = float(0)
+change_value_list = []
+prior_value = float(0)
 
-# Lists to store data
-total_months = []
-net_p_l = []
-average_p_l = []
-increaseMax_p_l = []
-increaseMax_p_l = []
+csvpath = os.path.join('Resources', 'budget_data.csv')
 
-# with open(bank_csv, newline="", encoding='utf-8') as csvfile:
-with open(bank_csv, newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    for row in csvreader:
-        # Add total months
-        len(total_months)
-        total_months.append(row[1])
+with open(csvpath, 'r', newline='') as csvfile:
+    csv_reader = csv.reader(csvfile, delimiter=',')
+    csv_header = next(csv_reader)
 
-        # Add net profit/loss
+    for value in csv_reader:
+        month_count = month_count + 1
+        date_list.append(str(value[0]))
+        profit_loss_list.append(float(value[1]))
+
+        current_value = value[1]
+        change_value = float(current_value) - float(prior_value)
+        change_value_list.append(change_value)
+        prior_value = current_value
         
-        net_p_l.append(row[2])
+def average(change_value_list):
+    x = len(change_value_list)
+    total = sum(change_value_list) - change_value_list[0]
+    avg = total / (x - 1)
+    return avg
 
-        # Add average profit/loss
-        def average(total_months)
-             length = len(total_months)
-             total = 0.0
-             for number in total_months
-                  total += retun total / length
-                
-        average_p_l.append(row[3])
+average_change = round(average(change_value_list), 2)
 
-        # Add maximum increase profit/loss
-        increaseMax_p_l.append(row[4])
+total_profit_loss = round(sum(profit_loss_list))
+highest_profit_loss = round(max(profit_loss_list))
+lowest_profit_loss = round(min(profit_loss_list))
+highest_index = profit_loss_list.index(highest_profit_loss)
+lowest_index = profit_loss_list.index(lowest_profit_loss)
 
-         # Add maximum decrease profit/loss
-        increaseMax_p_l.append(row[5])
+print("Financial Analysis")
+print("-------------------------------------------------")
+print(f"Total Months: {month_count}")
+print(f"Total: ${total_profit_loss}")
+print(f"Average Change: ${average_change}")
+print(f"Greatest Increase in Profits: {date_list[highest_index]} (${highest_profit_loss})")
+print(f"Greatest Decrease in Profits: {date_list[lowest_index]} (${lowest_profit_loss})")
 
-# Zip lists together
-cleaned_csv = zip(total_months, net_p_l, average_p_l, increaseMax_p_l, increaseMax_p_l)
+output_path = os.path.join("financial_analysis.txt")
+with open(output_path, "w", newline="") as text_file:
 
-# Set variable for output file
-output_file = os.path.join("bank_final.csv")
+    print("Financial Analysis", file=text_file)
+    print("-------------------------------------------------", file=text_file)
+    print(f"Total Months: {month_count}", file=text_file)
+    print(f"Total: ${total_profit_loss}", file=text_file)
+    print(f"Average Change: ${average_change}", file=text_file)
+    print(f"Greatest Increase in Profits: {date_list[highest_index]} (${highest_profit_loss})", file=text_file)
+    print(f"Greatest Decrease in Profits: {date_list[lowest_index]} (${lowest_profit_loss})", file=text_file)
 
-#  Open the output file
-with open(output_file, "w", newline="") as datafile:
-    writer = csv.writer(datafile)
-
-    # Write the header row
-    writer.writerow(["Total Months", "Total Revenue", "Average Change", "Greatest Increase in Profits ()",                            "Greatest Decrease in Profits Sep-2012" ()]
-                    
-    # Write in zipped rows
-    writer.writerows(cleaned_csv)
+    csvfile.close()
