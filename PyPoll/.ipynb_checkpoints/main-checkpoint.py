@@ -1,7 +1,7 @@
 import os
 import csv
 
-# set initial variables and create lists
+# declare variables and create lists
 total_votes = 0
 candidate_list = []
 candidate_name = []
@@ -32,10 +32,10 @@ with open(csvpath, 'r', newline='') as csvfile:
             candidate_vote[3] += 1
             
     # create functions to calculate total vote percentage
-    candidate_vote_percent[0] = round(100 * (candidate_vote[0] / total_votes), 4)
-    candidate_vote_percent[1] = round(100 * (candidate_vote[1] / total_votes), 4)
-    candidate_vote_percent[2] = round(100 * (candidate_vote[2] / total_votes), 4)
-    candidate_vote_percent[3] = round(100 * (candidate_vote[3] / total_votes), 4)
+    candidate_vote_percent[0] = float(100 * (candidate_vote[0] / total_votes))
+    candidate_vote_percent[1] = float(100 * (candidate_vote[1] / total_votes))
+    candidate_vote_percent[2] = float(100 * (candidate_vote[2] / total_votes))
+    candidate_vote_percent[3] = float(100 * (candidate_vote[3] / total_votes))
 
     # determine the winner
     if candidate_vote[0] == max(candidate_vote[0], candidate_vote[1], candidate_vote[2], candidate_vote[3]):
@@ -52,25 +52,25 @@ with open(csvpath, 'r', newline='') as csvfile:
     print("-----------------------------")
     print(f"Total Votes: {total_votes}")
     print("-----------------------------")
-    print(f"{candidate_name[0]}: {candidate_vote_percent[0]}% ({candidate_vote[0]})")
-    print(f"{candidate_name[1]}: {candidate_vote_percent[1]}% ({candidate_vote[1]})")
-    print(f"{candidate_name[2]}: {candidate_vote_percent[2]}% ({candidate_vote[2]})")
-    print(f"{candidate_name[3]}: {candidate_vote_percent[3]}% ({candidate_vote[3]})")
+    print(f"{candidate_name[0]}: {candidate_vote_percent[0]:.3f}% ({candidate_vote[0]})")
+    print(f"{candidate_name[1]}: {candidate_vote_percent[1]:.3f}% ({candidate_vote[1]})")
+    print(f"{candidate_name[2]}: {candidate_vote_percent[2]:.3f}% ({candidate_vote[2]})")
+    print(f"{candidate_name[3]}: {candidate_vote_percent[3]:.3f}% ({candidate_vote[3]})")
     print("-----------------------------")
     print(f"Winner: {candidate_winner}")
 
 # create text file and then write election results
-output_path = os.path.join("..", "Output", "Election_Results.txt")
+output_path = os.path.join("Election_Results.txt")
 with open(output_path, 'w', newline='') as text_file:
 
     print("Election Results", file=text_file)
     print("-----------------------------", file=text_file)
     print(f"Total Votes: {total_votes}", file=text_file)
     print("-----------------------------", file=text_file)
-    print(f"{candidate_name[0]}: {candidate_vote_percent[0]}% ({candidate_vote[0]})", file=text_file)
-    print(f"{candidate_name[1]}: {candidate_vote_percent[1]}% ({candidate_vote[1]})", file=text_file)
-    print(f"{candidate_name[2]}: {candidate_vote_percent[2]}% ({candidate_vote[2]})", file=text_file)
-    print(f"{candidate_name[3]}: {candidate_vote_percent[3]}% ({candidate_vote[3]})", file=text_file)
+    print(f"{candidate_name[0]}: {candidate_vote_percent[0]:.3f}% ({candidate_vote[0]})", file=text_file)
+    print(f"{candidate_name[1]}: {candidate_vote_percent[1]:.3f}% ({candidate_vote[1]})", file=text_file)
+    print(f"{candidate_name[2]}: {candidate_vote_percent[2]:.3f}% ({candidate_vote[2]})", file=text_file)
+    print(f"{candidate_name[3]}: {candidate_vote_percent[3]:.3f}% ({candidate_vote[3]})", file=text_file)
     print("-----------------------------", file=text_file)
     print(f"Winner: {candidate_winner}", file=text_file)
 
