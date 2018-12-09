@@ -10,7 +10,7 @@ candidate_winner = []
 
 csvpath = os.path.join('Resources', 'election_data.csv')
 
-with open(csvpath, 'r+', newline='') as csvfile:
+with open(csvpath, 'r', newline='') as csvfile:
 
     csv_reader = csv.reader(csvfile, delimiter=',')
 
@@ -25,3 +25,4 @@ with open(csvpath, 'r+', newline='') as csvfile:
             candidate_name.append(row[2])
         if row[2] == candidate_name[0]:
             candidate_vote[0] += 1
+        elif row[2] == candidate_name[1]:
