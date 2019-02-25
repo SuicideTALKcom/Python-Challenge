@@ -1,6 +1,4 @@
-# Unit 3 | Assignment - Py Me Up, Charlie
-
-## Background
+## Py Me Up, Charlie
 
 Well... you've made it!
 
